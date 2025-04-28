@@ -1,0 +1,30 @@
+.box {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  padding: 30px;
+  border: blueviolet;
+  border-width: 10px;
+  border-style: dashed;
+  background-color: aquamarine;
+  box-sizing: border-box;
+  color: rgb(31, 28, 199);
+  outline: 5px solid gold;
+  outline-offset: -20px;
+  border-radius: 60% 20% / 30% 58%;
+  box-shadow: -15px 10px rgb(252, 237, 102);
+}
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: hsl(90, 50%, 50%);
+}
+div {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+}
+.box-1 {
+  background-image: linear-gradient(indianred, cornflowerblue);
+}

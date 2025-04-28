@@ -1,0 +1,681 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+   Убираем внутренние отступы слева тегам списков,
+   у которых есть атрибут class
+  */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+   Убираем внешние отступы body и двум другим тегам,
+   у которых есть атрибут class
+  */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+   Убираем внешние отступы вертикали нужным тегам,
+   у которых есть атрибут class
+  */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+   Убираем стандартный маркер маркированному списку,
+   у которого есть атрибут class
+  */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+   Обнуляем вертикальные внешние отступы параграфа,
+   объявляем локальную переменную для внешнего отступа вниз,
+   чтобы избежать взаимодействие с более сложным селектором
+  */
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
+   Внешний отступ вниз для параграфа без атрибута class,
+   который расположен не последним среди своих соседних элементов
+  */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+   Упрощаем работу с изображениями и видео
+  */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+   Наследуем свойства шрифт для полей ввода
+  */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+     Пригодится в большинстве ситуаций
+     (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+  height: 100%;
+  /**
+     Убираем скачок интерфейса по горизонтали
+     при появлении / исчезновении скроллбара
+    */
+  scrollbar-gutter: stable;
+}
+
+/**
+   Плавный скролл
+  */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+     Пригодится в большинстве ситуаций
+     (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+  min-height: 100%;
+  /**
+     Унифицированный интерлиньяж
+    */
+  line-height: 1.5;
+}
+
+/**
+   Нормализация высоты элемента ссылки при его инспектировании в DevTools
+  */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+   Курсор-рука при наведении на элемент
+  */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+   Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+  */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+   Приведение рамок таблиц в классический 'collapse' вид
+  */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+   Удаляем все анимации и переходы для людей,
+   которые предпочитают их не использовать
+  */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  --color-orange: #c87b5e;
+  --color-gray: #35312e;
+  --color-white: #ffffff;
+  --color-green: #6c674d;
+  --color-brown: #4f463f;
+
+  --font-family-base: "Roboto", sans-serif;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-brown);
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+  background-color: var(--color-white);
+}
+
+a {
+  color: var(--color-gray);
+}
+
+.top-header {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  background: #f0eedd;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 170%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #670a18;
+  padding-block: 10px;
+}
+.header-menu {
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 48px;
+}
+.header-menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 35px;
+}
+.header-menu-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 170%;
+  letter-spacing: 0.04em;
+  padding-block: 30px;
+}
+.header-profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 170%;
+  letter-spacing: 0.04em;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background-color: var(--color-orange);
+  margin-block: 24px;
+}
+.header-logo {
+  padding-block: 25px;
+}
+.kartinka {
+  position: relative;
+  background-image: url("./images/skovoroda.png");
+  background-size: cover; /* Растягиваем фон на всю ширину и высоту */
+  background-position: center; /* Центрируем фон */
+  background-repeat: no-repeat; /* Запрещаем повторение фона */
+  width: 100%;
+  height: 605px; /* Фиксированная высота */
+}
+.kartinka-text {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  display: flex;
+  flex-direction: column;
+  column-gap: 9px;
+}
+
+.button-shop {
+  margin-top: 40px;
+  display: inline-flex;
+  align-items: center;
+  width: 248px;
+  height: 60px;
+  padding-inline: 55px;
+  padding-block: 20px;
+  color: var(--color-white);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 2;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  background-color: var(--color-orange);
+}
+.kartinka-text-description {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: var(--color-gray);
+}
+.kartinka-text-h2 {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 110%;
+  letter-spacing: 0.02em;
+  color: var(--color-gray);
+}
+.podcherk {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.podcherk::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background-color: currentColor;
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+}
+
+.tradition {
+  background-color: #f5f1e9;
+  height: 212px;
+  width: auto;
+}
+.tradition-text {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 110%;
+  letter-spacing: 0.02em;
+  color: var(--color-gray);
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 45px;
+}
+.tradition-list {
+  display: flex;
+  flex-direction: row;
+  column-gap: 130px;
+  justify-content: center;
+  padding-top: 44px;
+  margin-inline: clamp(16px, 10vw, 224px);
+}
+.welcome {
+  height: 340px;
+}
+
+.welcome-text {
+  display: flex;
+  column-gap: 135px;
+  padding-top: 120px;
+  padding-left: 135px;
+  padding-right: 120px;
+  justify-content: center;
+}
+.welcome-h3 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 41px;
+  line-height: 113%;
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: var(--color-gray);
+}
+
+.welcome-description {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 162%;
+  color: var(--color-brown);
+}
+
+.design {
+  background-color: #fbf6ea;
+  height: 939px;
+}
+.design-everything {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 74px;
+  row-gap: 53px;
+}
+.design-text {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 137%;
+  text-align: center;
+  color: var(--color-gray);
+}
+.pan-section {
+  position: relative;
+  width: 100%;
+  height: 692px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pan-image {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: 4%;
+}
+.pan-text {
+  position: absolute;
+  font-size: 1rem;
+  color: var(--color-brown);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.pan-text1 {
+  top: 20%;
+  left: 30%;
+}
+.pan-text2 {
+  top: 50%;
+  left: 30%;
+}
+.pan-text3 {
+  bottom: 10%;
+  left: 30%;
+}
+.pan-text4 {
+  top: 20%;
+  right: 25%;
+}
+.pan-text5 {
+  top: 50%;
+  right: 30%;
+}
+.pan-text6 {
+  bottom: 20%;
+  right: 30%;
+}
+
+.essentials {
+  height: auto;
+  background-color: #fcfaf6;
+  padding-bottom: 40px;
+}
+
+.container-editions {
+  background-color: var(--color-white);
+  border: 1px solid #000;
+  width: 96%;
+  height: auto;
+  margin: 0 auto;
+  padding-inline: 10px;
+}
+.edition-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 76px;
+  text-align: center;
+  row-gap: 18px;
+}
+.edition-h3 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 33px;
+  line-height: 167%;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--color-gray);
+}
+.edition-description {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 161%;
+  text-align: center;
+  color: var(--color-brown);
+}
+.edition-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+  list-style-type: none;
+  padding: 0;
+  align-items: start;
+}
+.edition-cards-item {
+  text-align: center;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.image-container {
+  width: 286px;
+  height: 229px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fcfaf6;
+}
+
+.edition-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.image-container::before {
+  content: "";
+  position: absolute;
+  background-color: #f7f3eb;
+  width: 286px;
+  height: 229px;
+  border-radius: 50%;
+}
+.first {
+  position: relative;
+  top: -10%;
+}
+.second {
+  position: relative;
+  top: -10%;
+}
+.third {
+  position: relative;
+  top: -15%;
+}
+.four {
+  position: relative;
+  top: 10%;
+}
+.posuda-name {
+  margin-top: 15px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 170%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-gray);
+}
+.posuda-price {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin-bottom: 5px;
+}
+.posuda-description {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 178%;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-gray);
+  margin-bottom: 10px;
+}
+
+.dirty {
+  background-color: #f5f1e9;
+}
+
+.container-dirty {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  max-width: 1900px;
+  margin: 0 auto;
+}
+
+.dirty-image {
+  width: 100%; /* Изображения занимают всю ширину колонки */
+  height: auto; /* Сохраняем пропорции */
+  object-fit: cover; /* Заполняем пространство */
+}
+
+.dirty-text {
+  text-align: center; /* Центрируем текст */
+}
+
+.dirty-hashtag {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 185%;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-brown);
+  margin-bottom: 30px;
+}
+
+.dirty-h4 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 192%;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--color-gray);
+  margin-bottom: 60px;
+}
+
+.button-dirty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 206px;
+  height: 54px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-brown);
+  background-color: var(--color-white);
+  border: 1px solid rgba(170, 160, 152, 0.29);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 1400px) {
+  .edition-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .container-editions {
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .container-dirty {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .dirty-h4 {
+    font-size: 20px; /* Уменьшаем размер текста */
+  }
+
+  .button-dirty {
+    width: 100%; /* Кнопка занимает всю ширину */
+    padding-inline: 20px; /* Уменьшаем внутренние отступы */
+  }
+}
