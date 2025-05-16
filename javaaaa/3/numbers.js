@@ -1,7 +1,7 @@
-const num = 42;
-const float = 42.42;
-const pow = 10e3;
-const big = 1_000_000;
+// const num = 42;
+// const float = 42.42;
+// const pow = 10e3;
+// const big = 1_000_000;
 
 // console.log(Number.MAX_SAFE_INTEGER);
 // console.log(Math.pow(2, 53) - 1);
