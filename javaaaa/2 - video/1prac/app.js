@@ -251,4 +251,112 @@ const names = ["Denis", "Ivan", "AMAls", "Batyrhjanhadadada"];
 
 // //
 
-//22 Видео
+//22 Видео  введение в dom
+
+// const div = document.querySelector("div");
+// const titles = document.querySelectorAll("h1");
+// // const h1 = document.getElementsByTagName("h1");
+// // console.log(h1);
+// // console.log(titles);
+// // console.log(Array.from(titles));
+
+// // console.log(div.parentElement);
+
+// const link = div.querySelector(".link");
+// // console.log(link);
+
+// // console.log(link.closest(".content"));
+// div.classList.add("article", "custom");
+// div.classList.remove("article");
+// // console.log(div.classList);
+// // console.log(link.href);
+
+// div.setAttribute("id", "myId");
+// // div.getAttribute("id");
+// // div.removeAttribute("id");
+// // div.hasAttribute("id");
+// // div.dataset;
+
+//24 Манипуляция  DOM
+
+// const title = document.querySelector("h1");
+// title.innerHTML = "<span>text</span>";
+// title.textContent = "new text";
+// title.appendChild;
+// title.insertAdjacentHTML("afterend", "<h2>title h2 </h2>");
+
+// title.innerHTML += "<span>new text</span>";
+// const span = title.querySelector("span");
+// console.log(span);
+// title.innerHTML += "<span>new text2</span>";
+// span.textContent = "adadasdsa";
+
+//СОЗДАНИЕ ЭЛЕМЕНТА
+// const span = document.createElement("span");
+// span.textContent = "fafafafasssssssssssssssss";
+// span.classList.add("myClass");
+// // console.log(span);
+// title.appendChild(span);
+
+// // div.appendChild(span);
+
+// const fragment = document.createDocumentFragment();
+// const colors = ["black", "yellow", "orange"];
+// colors.forEach((color) => {
+//   const item = document.createElement("div");
+//   item.classList.add(`bg-${color}`);
+//   item.style.background = color;
+//   item.textContent = color;
+//   fragment.appendChild(item);
+// });
+
+// document.body.appendChild(fragment);
+
+// //Удаление элементов
+// title.remove();
+
+//СОБЫТИЯ 25 видео
+const btn = document.querySelector("button");
+const link = document.querySelector("a");
+// btn.onclick = function () {
+//   console.log("click");
+// };
+
+// btn.addEventListener("click", function (e) {
+//   console.log(e);
+// });
+
+// btn.addEventListener("click", function () {
+//   console.log("click2");
+// });
+// btn.addEventListener("click", (e) => {
+//   console.log(this);
+//   console.log(e);
+// });
+// function clickhandler(e) {
+//   e.preventDefault();
+//   console.log(this);
+//   console.log("click");
+// }
+
+// link.addEventListener("click", clickhandler);
+
+// link.removeEventListener("click", clickhandler);
+// const container = document.querySelector(".container");
+
+// btn.addEventListener("click", (e) => {
+//   const div = document.createElement("div");
+//   const nestedBtn = document.createElement("button");
+//   div.textContent = Math.floor(Math.random() * 11);
+//   nestedBtn.textContent = "button";
+//   container.appendChild(div);
+//   div.appendChild(nestedBtn);
+// });
+// container.addEventListener("click", (e) => {
+//   console.dir(e.target);
+//   if (e.target.tagName === "BUTTON") {
+//     console.log("buttton clicked");
+//   }
+// });
+
+//26 видео Всплытие и перехват события
