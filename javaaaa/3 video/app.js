@@ -663,8 +663,37 @@ const { name, ...info } = person;
 
 // console.log(name, info);
 
-function logPerson({ name, age }) {
-  console.log(name + " " + age);
-}
+// function logPerson({ name, age }) {
+//   console.log(name + " " + age);
+// }
 
-logPerson(person);
+// logPerson(person);
+
+//========================================================================
+
+//Урок 17. JavaScript. Все о LocalStorage
+
+const myNumber = 42;
+
+// localStorage.removeItem("number");
+// console.log(localStorage.getItem("number"));
+// localStorage.setItem("number", myNumber.toString());
+// console.log(localStorage.getItem("number"));
+// localStorage.clear();
+
+const person2 = {
+  name: "Max",
+  age: 20,
+};
+
+// localStorage.setItem("person", JSON.stringify(person2));
+const raw = localStorage.getItem("person");
+const rawParsed = JSON.parse(raw);
+rawParsed.name = "Batyrhan";
+// console.log(rawParsed);
+
+//==========================================================================
+
+window.addEventListener("storage", (event) => {
+  console.log(event);
+});
